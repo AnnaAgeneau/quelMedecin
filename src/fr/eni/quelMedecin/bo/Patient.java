@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Patient {
-    private String nom;
-    private String prenom;
-    private String numDeTelephone;
-    private char sexe;
-    private long numSecSocial;
-    private LocalDate DateNaissance;
-    private String commentaires;
+public class Patient extends Personne {
+
+    private final char sexe;
+    private final long numSecSocial;
+    private final LocalDate DateNaissance;
+    private final String commentaires;
+    private final Adresse adresse;
 
 
     public Patient(String nom,
@@ -19,18 +18,18 @@ public class Patient {
                    String numDeTelephone,
                    char sexe,
                    long numSecSocial,
-                   LocalDate DateNaissance,
-                   String commentaires) {
-
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numDeTelephone = numDeTelephone;
+                   LocalDate dateNaissance,
+                   String commentaires,
+                   Adresse adresse) {
+        super(nom, prenom, numDeTelephone);
         this.sexe = sexe;
         this.numSecSocial = numSecSocial;
-        this.DateNaissance = DateNaissance;
+        DateNaissance = dateNaissance;
         this.commentaires = commentaires;
-
+        this.adresse = adresse;
     }
+
+
 
     public void afficher () {
         String commentaireModifie;
@@ -41,8 +40,8 @@ public class Patient {
         }
 
         //this.commentaires == null ? "[Aucun commentaires]" : this.commentaires; ternaire
-        System.out.println(this.nom.toUpperCase() + " " + this.prenom);
-        System.out.println("Téléphone : " + this.numDeTelephone);
+        System.out.println(super.getNom().toUpperCase() + " " + super.getPrenom());
+        System.out.println("Téléphone : " + super.getNumDeTelephone());
         /*if (this.sexe == 'F') {
             System.out.println("sexe : Féminin");
         } else {
@@ -52,8 +51,9 @@ public class Patient {
         System.out.println(this.sexe == 'F' ? "sexe : Féminin" : "sexe : Masculin");
         System.out.println("Numéro de Sécurité Sociale :" + this.numSecSocial);
         System.out.println("Date de naissance : " + this.DateNaissance.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
-        System.out.println("Commentaires :" + this.commentaires);
-
+        System.out.println("Commentaires :" + commentaireModifie);
+        this.adresse.afficher();
     }
+
 
 }
